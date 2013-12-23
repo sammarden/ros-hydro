@@ -1,0 +1,7 @@
+
+base_local_planner: wall_following/DWAPlannerROS
+
+DWAPlannerROS:
+  sim_time: 5.0
+  sim_granularity: 0.1
+

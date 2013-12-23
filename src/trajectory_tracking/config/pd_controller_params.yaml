@@ -1,0 +1,11 @@
+
+state_topic: /state
+trajectory_topic: /traj
+
+cmd_vel_topic: /husky/cmd_vel
+
+k_p_lateral: 0.2
+k_d_lateral: 0.0
+k_p_angular: 1.0
+k_d_angular: 0.0
+

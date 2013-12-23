@@ -1,0 +1,11 @@
+
+<launch>
+
+  <node pkg="trajectory_tracking" type="pd_controller_node" name="pd_controller" output="screen">
+    
+    <rosparam file="$(find trajectory_tracking)/config/pd_controller_params.yaml"/>
+
+  </node>
+
+</launch>
+

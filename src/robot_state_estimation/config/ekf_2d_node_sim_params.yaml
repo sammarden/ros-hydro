@@ -1,0 +1,7 @@
+
+map_frame: map
+robot_base_frame: base_footprint
+
+odom_topic: /odom
+imu_topic: /imu
+

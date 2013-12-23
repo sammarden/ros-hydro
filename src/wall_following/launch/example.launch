@@ -1,0 +1,14 @@
+
+<launch>
+
+  <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <rosparam file="$(find wall_following)/config/example_params.yaml"/>
+    <rosparam file="$(find wall_following)/config/costmap_params.yaml" ns="local_costmap"/>
+    <rosparam file="$(find wall_following)/config/local_costmap_params.yaml"/>
+    <rosparam file="$(find wall_following)/config/costmap_params.yaml" ns="global_costmap"/>
+    <rosparam file="$(find wall_following)/config/global_costmap_params.yaml"/>
+    <remap from="/cmd_vel" to="/husky/cmd_vel"/>
+  </node>
+
+</launch>
+

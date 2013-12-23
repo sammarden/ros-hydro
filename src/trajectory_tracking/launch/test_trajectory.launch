@@ -1,0 +1,11 @@
+
+<launch>
+
+  <include file="$(find robot_state_estimation)/launch/ekf_2d.launch"/>
+
+  <include file="$(find trajectory_tracking)/launch/pd_controller.launch"/>
+
+  <node pkg="trajectory_tracking" type="test_trajectory_node" name="test_trajectory"/>
+
+</launch>
+

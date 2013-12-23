@@ -1,0 +1,24 @@
+#! /usr/bin/env python
+
+import rospy
+
+import Leap
+
+import leap_motion_driver
+
+if __name__ == '__main__':
+
+    leap_controller = Leap.Controller()
+
+    rospy.init_node('leap_motion_node')
+
+    driver = leap_motion_driver.ROSLeapMotionDriver()
+
+    while not rospy.is_shutdown():
+        
+        hands = leap_controller.frame().hands
+
+        driver.publish_hands(hands)
+
+        rospy.sleep(0.01)
+

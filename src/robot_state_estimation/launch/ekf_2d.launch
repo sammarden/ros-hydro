@@ -1,0 +1,11 @@
+
+<launch>
+
+  <node pkg="robot_state_estimation" type="ekf_2d_node" name="ekf_2d" output="screen">
+
+    <rosparam file="$(find robot_state_estimation)/config/ekf_2d_node_sim_params.yaml"/>
+
+  </node>
+
+</launch>
+
