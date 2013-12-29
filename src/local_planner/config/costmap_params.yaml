@@ -1,0 +1,9 @@
+
+obstacle_range: 25 
+raytrace_range: 30 
+footprint: [[-0.5, -0.33], [-0.5, 0.33], [0.5, 0.33], [0.5, -0.33]]
+footprint_padding: 0.01
+inflation_radius: 0.6 
+observation_sources: front_laser 
+front_laser: {data_type: LaserScan, topic: /front_laser/scan, marking: true, clearing: true}
+

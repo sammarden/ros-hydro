@@ -1,0 +1,20 @@
+
+<launch>
+
+  <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <rosparam file="$(find local_planner)/config/example_params.yaml"/>
+    <rosparam file="$(find local_planner)/config/costmap_params.yaml" ns="local_costmap"/>
+    <rosparam file="$(find local_planner)/config/local_costmap_params.yaml"/>
+    <rosparam file="$(find local_planner)/config/costmap_params.yaml" ns="global_costmap"/>
+    <rosparam file="$(find local_planner)/config/global_costmap_params.yaml"/>
+    <remap from="/cmd_vel" to="/husky/cmd_vel"/>
+  </node>
+
+  <node pkg="laser_assembler" type="laser_scan_assembler" name="front_laser_scan_assembler" output="screen">
+    <remap from="scan" to="/front_laser/scan"/>
+    <param name="max_scans" value="100"/>
+    <param name="fixed_frame" value="/odom"/>
+  </node>
+
+</launch>
+
