@@ -1,0 +1,11 @@
+
+input_cmd_vel_topic: cmd_vel_mux/cmd_vel
+filtered_cmd_vel_topic: husky/cmd_vel 
+
+cmd_vel_filters:
+
+-
+  name: imu_feedback
+  type: cmd_vel_filters/IMUFeedbackFilter
+  params: {imu_topic: imu}
+

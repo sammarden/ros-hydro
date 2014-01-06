@@ -4,7 +4,7 @@
 namespace wall_following
 {
 
-WallFollowingCostFunction::WallFollowingCostFunction(costmap_2d::Costmap2D * costmap) : costmap_(costmap), target_dist_to_wall_(1.0), max_raytrace_dist_(3.0), wall_following_side_(LEFT)
+WallFollowingCostFunction::WallFollowingCostFunction(costmap_2d::Costmap2D * costmap) : costmap_(costmap), target_dist_to_wall_(1.0), max_raytrace_dist_(2.0), wall_following_side_(LEFT)
 {
 
 }
@@ -22,7 +22,8 @@ bool WallFollowingCostFunction::prepare()
 double WallFollowingCostFunction::scoreTrajectory(base_local_planner::Trajectory & traj)
 {
 
-  double cost = 0.0;
+//  double cost = 0.0;
+  double cost = std::numeric_limits<double>::max();
 
   int num_valid_points = 0;
 
@@ -38,7 +39,8 @@ double WallFollowingCostFunction::scoreTrajectory(base_local_planner::Trajectory
     // Only include valid distances.
     if (dist_to_wall > 0.0)
     {
-      cost += scoreDistanceToWall(dist_to_wall);
+//      cost += scoreDistanceToWall(dist_to_wall);
+      cost = std::min(cost, scoreDistanceToWall(dist_to_wall));
       ++num_valid_points;
     }
 
@@ -51,7 +53,7 @@ double WallFollowingCostFunction::scoreTrajectory(base_local_planner::Trajectory
   }
   else
   {
-    return 0.0;
+    return std::numeric_limits<double>::max();
   }
 
 }
@@ -132,7 +134,7 @@ double WallFollowingCostFunction::scoreDistanceToWall(double dist)
   double delta_dist = fabs(dist - target_dist_to_wall_);
 //  double scaled_delta_dist = delta_dist/target_dist_to_wall_;
 //  return 1.01 - exp(-(scaled_delta_dist*scaled_delta_dist));
-  return std::max(delta_dist/max_raytrace_dist_*10.0f, 0.0);
+  return delta_dist/max_raytrace_dist_;
 }
 /**
  * @brief  Raytrace a line and apply some action at each step

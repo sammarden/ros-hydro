@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>cmd_vel_filters</name>
+  <name>keyboard_teleop</name>
   <version>0.0.0</version>
-  <description>The cmd_vel_filters package</description>
+  <description>The keyboard_teleop package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/cmd_vel_filters</url> -->
+  <!-- <url type="website">http://wiki.ros.org/keyboard_teleop</url> -->
 
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
@@ -40,13 +40,9 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>filters</build_depend>
-  <build_depend>pluginlib</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>param_utils</build_depend>
-  <run_depend>filters</run_depend>
-  <run_depend>pluginlib</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>param_utils</run_depend>
@@ -58,7 +54,6 @@
     <!-- <metapackage/> -->
 
     <!-- Other tools can request additional information be placed here -->
-    <filters plugin="${prefix}/cmd_vel_filter_plugins.xml"/>
 
   </export>
 </package>

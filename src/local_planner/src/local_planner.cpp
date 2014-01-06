@@ -35,6 +35,7 @@ void LocalPlanner::initialise(base_local_planner::LocalPlannerUtil & local_plann
   nearest_scan_cost_func_ptr_->setTargetDistanceToScan(1.0);
   nearest_scan_cost_func_ptr_->setMaxDistanceToScan(5.0);
   nearest_scan_cost_func_ptr_->setScale(10.0);
+  nearest_scan_cost_func_ptr_->setSide(wall_following::LEFT);
 
 }
 
@@ -78,7 +79,7 @@ bool LocalPlanner::computeVelocityCommands(geometry_msgs::Twist & cmd_vel)
   traj_gen_.setAngularVelMax(max_ach_ang_vel);
   traj_gen_.setAngularVelSamples(angular_vel_samples_);
   traj_gen_.setRobotPose(robot_x_, robot_y_, robot_th_);
-  traj_gen_.setAngularVelResamples(2);
+  traj_gen_.setAngularVelResamples(0);
   traj_gen_.setSimTime(sim_time_);
   traj_gen_.setSimDt(sim_dt_);
 

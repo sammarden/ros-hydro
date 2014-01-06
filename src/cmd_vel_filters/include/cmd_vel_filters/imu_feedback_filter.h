@@ -5,8 +5,11 @@
 #include <ros/ros.h>
 
 #include <geometry_msgs/Twist.h>
+#include <sensor_msgs/Imu.h>
 
 #include <filters/filter_base.h>
+
+#include <pluginlib/class_list_macros.h>
 
 #include <boost/thread/thread.hpp>
 
@@ -40,9 +43,9 @@ private:
 
   double angular_vel_;
 
-  ros::Time prev_imu_time_;
+  double prev_angular_vel_;
 
-  bool imu_thread_should_run_;
+  ros::Time prev_imu_time_;
 
 };
 

@@ -1,0 +1,6 @@
+<library path="lib/libimu_feedback_filter_plugin">
+  <class name="cmd_vel_filters/IMUFeedbackFilter" type="cmd_vel_filters::IMUFeedbackFilter" base_class_type="filters::FilterBase<geometry_msgs::Twist>">
+    <description>
+    </description>
+  </class>
+</library>

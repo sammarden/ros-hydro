@@ -1,0 +1,27 @@
+
+valid_waypoints:
+
+  frame_id: /map
+
+  waypoint_list:
+
+    - x: 1.0
+      y: -1.0
+
+    - x: 2.0
+      y: -2.0
+
+invalid_waypoints_1:
+
+  waypoint_list:
+
+    - x: 1.0
+      y: -1.0
+
+    - x: 2.0
+      y: -2.0
+
+invalid_waypoints_2:
+
+  frame_id: /map
+

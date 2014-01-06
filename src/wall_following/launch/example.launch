@@ -10,5 +10,11 @@
     <remap from="/cmd_vel" to="/husky/cmd_vel"/>
   </node>
 
+  <node pkg="laser_assembler" type="laser_scan_assembler" name="front_laser_scan_assembler">
+    <remap from="scan" to="/front_laser/scan"/>
+    <param name="max_scans" value="100"/>
+    <param name="fixed_frame" value="odom"/>
+  </node>
+
 </launch>
 

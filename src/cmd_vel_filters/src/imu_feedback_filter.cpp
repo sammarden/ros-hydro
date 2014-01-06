@@ -1,11 +1,13 @@
 
 #include <cmd_vel_filters/imu_feedback_filter.h>
 
-PLUGINLIB_EXPORT_CLASS(cmd_vel_filters::IMUFeedbackFilter, filters::FilterBase<geometry_msgs::Twist>)
+PLUGINLIB_EXPORT_CLASS(cmd_vel_filters::IMUFeedbackFilter, filters::FilterBase<geometry_msgs::Twist>);
+
+namespace cmd_vel_filters
+{
 
 IMUFeedbackFilter::~IMUFeedbackFilter()
 {
-  imu_thread_should_run_ = false;
   imu_thread_->join();
 }
 
@@ -15,17 +17,17 @@ bool IMUFeedbackFilter::configure()
   std::string imu_topic;
   getParam("imu_topic", imu_topic);
 
-  prev_imu_time_ = ros::Time(0, 0);
+  prev_angular_vel_ = 0.0;
 
-  imu_thread_should_run_ = true; 
+  prev_imu_time_ = ros::Time(0, 0);
 
   imu_sub_ = node_handle_.subscribe(imu_topic, 1, &IMUFeedbackFilter::imuCallback, this);
 
-  imu_thread_ = boost::shared_ptr<boost::thread>(new boost::thread(boost::bind(&IMUFeedbackFilter::spin(), this)));
+  imu_thread_ = boost::shared_ptr<boost::thread>(new boost::thread(boost::bind(&IMUFeedbackFilter::spin, this)));
 
 }
 
-bool update(const geometry_msgs::Twist & input_cmd_vel, geometry_msgs::Twist & filtered_cmd_vel)
+bool IMUFeedbackFilter::update(const geometry_msgs::Twist & input_cmd_vel, geometry_msgs::Twist & filtered_cmd_vel)
 {
 
   ros::Time current_time = ros::Time::now();
@@ -39,22 +41,31 @@ bool update(const geometry_msgs::Twist & input_cmd_vel, geometry_msgs::Twist & f
 
   if (dt < 0.1)
   {
-    filtered_cmd_vel.angular.z = input_cmd_vel.angular.z + angular_vel_error_; 
+    filtered_cmd_vel.angular.z = prev_angular_vel_ + angular_vel_error_; 
   }
   else
   {
     filtered_cmd_vel.angular.z = input_cmd_vel.angular.z;
   }
 
+  prev_angular_vel_ = filtered_cmd_vel.angular.z;
+
 }
 
 void IMUFeedbackFilter::spin()
 {
 
-  while (ros::ok() && imu_thread_should_run_)
+  while (ros::ok())
   {
-    ros::spinOnce();
-    ros::rate(50.0).sleep();
+    try
+    {
+      ros::spinOnce();
+      ros::Rate(50.0).sleep();
+    }
+    catch (boost::thread_interrupted &)
+    {
+      return;
+    }
   }
 
 }
@@ -62,10 +73,12 @@ void IMUFeedbackFilter::spin()
 void IMUFeedbackFilter::imuCallback(const sensor_msgs::Imu::ConstPtr & imu)
 {
 
-  boost::mutex::scoped_lock(imu_lock_);
+  boost::mutex::scoped_lock l(imu_lock_);
 
-  angular_vel_ = imu->angular.z;
+  angular_vel_ = imu->angular_velocity.z;
   prev_imu_time_ = imu->header.stamp;
 
 }
+
+} // namespace cmd_vel_filters
 

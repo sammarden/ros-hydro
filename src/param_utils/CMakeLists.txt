@@ -98,7 +98,19 @@ include_directories(
 
 ## Declare a cpp library
 add_library(param_utils
-  src/${PROJECT_NAME}/param_utils.cpp
+  src/param_utils.cpp
+  src/waypoint_parser.cpp
+)
+target_link_libraries(param_utils
+  ${catkin_LIBRARIES}
+)
+
+add_rostest_gtest(unit_tests_node
+  test/unit_tests.test
+  test/unit_tests.cpp
+)
+target_link_libraries(unit_tests_node
+  param_utils
 )
 
 ## Declare a cpp executable

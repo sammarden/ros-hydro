@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   roscpp
   std_msgs
+  param_utils
 )
 
 ## System dependencies are found with CMake's conventions
@@ -100,16 +101,26 @@ include_directories(
 )
 
 ## Declare a cpp library
-add_library(cmd_vel_filter_node
-  src/cmd_vel_filter_node.cpp
+#add_library(cmd_vel_filter_node
+#  src/cmd_vel_filter_node.cpp
+#  src/imu_feedback_filter.cpp
+#)
+#target_link_libraries(cmd_vel_filters_node
+#  ${catkin_LIBRARIES}
+#)
+add_library(imu_feedback_filter_plugin
   src/imu_feedback_filter.cpp
 )
-target_link_libraries(cmd_vel_filters_node
+target_link_libraries(imu_feedback_filter_plugin
   ${catkin_LIBRARIES}
 )
 
 ## Declare a cpp executable
 # add_executable(cmd_vel_filters_node src/cmd_vel_filters_node.cpp)
+add_executable(cmd_vel_filter_chain_node
+  src/cmd_vel_filter_chain_node.cpp
+)
+target_link_libraries(cmd_vel_filter_chain_node ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

@@ -16,7 +16,7 @@
        
 	<!-- Included URDF/XACRO Files -->
     <xacro:include filename="$(find husky_description)/urdf/materials.urdf.xacro" />
-    <xacro:include filename="$(find husky_description)/urdf/wheel.urdf.xacro" />
+    <xacro:include filename="$(find husky_sim)/urdf/wheel.urdf.xacro" />
     <xacro:include filename="$(find husky_description)/urdf/parts.urdf.xacro" />
     
 	<!-- PROPERTY LIST -->
@@ -203,7 +203,7 @@
                  stddev of 0.01m will put 99.7% of samples within 0.03m of the true
                  reading. -->
             <mean>0.0</mean>
-            <stddev>0.01</stddev>
+            <stddev>0.25</stddev>
           </noise>
         </ray>
         <plugin name="front_laser" filename="libgazebo_ros_laser.so">

@@ -2,7 +2,16 @@
 <launch>
 
   <include file="$(find husky_sim)/launch/base.urdf.gazebo.launch"/>
-  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find husky_sim)/worlds/wall_rows.world"/>
+  </include>
+
+  <include file="$(find keyboard_teleop)/launch/keyboard_teleop.launch"/>
+
+  <include file="$(find cmd_vel_filters)/launch/example.launch"/>
+
+  <node pkg="rviz" type="rviz" name="rviz"/>
 
 </launch>
 

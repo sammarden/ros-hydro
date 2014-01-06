@@ -1,0 +1,9 @@
+
+<launch>
+
+  <test pkg="param_utils" type="unit_tests_node" test-name="param_utils_unit_tests">
+    <rosparam file="$(find param_utils)/test/test.yaml"/>
+  </test>
+
+</launch>
+

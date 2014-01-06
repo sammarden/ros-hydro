@@ -66,12 +66,15 @@ double PreferFastCostFunction::scoreTrajectory(base_local_planner::Trajectory & 
 
   }
 
-  double avg_linear_vel_ = linear_dist/traj_time_;
-  double avg_angular_vel_ = angular_dist/traj_time_;
+  double avg_linear_vel = linear_dist/traj_time_;
+  double avg_angular_vel = angular_dist/traj_time_;
 
-  double score = std::min(1.0 - avg_linear_vel_/max_linear_vel_, 1.0 - avg_angular_vel_/max_angular_vel_);
+//  double score = std::min(1.0 - avg_linear_vel/max_linear_vel_, 1.0 - avg_angular_vel/max_angular_vel_);
+  double score = 1.0 - avg_linear_vel/max_linear_vel_ + avg_angular_vel/max_angular_vel_;
 
   score = std::max(score, 0.0);
+
+  ROS_INFO("%f %f %f %f", avg_linear_vel, max_linear_vel_, avg_angular_vel, score);
 
   return score;
 

@@ -1,0 +1,11 @@
+
+<launch>
+
+  <node pkg="cmd_vel_filters" type="cmd_vel_filter_chain_node" name="cmd_vel_filter_chain" output="screen">
+    <rosparam file="$(find cmd_vel_filters)/config/filter_params.yaml"/>
+  </node>
+
+  <include file="$(find cmd_vel_filters)/launch/cmd_vel_mux.launch"/>
+
+</launch>
+

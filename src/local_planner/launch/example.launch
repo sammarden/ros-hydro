@@ -7,7 +7,7 @@
     <rosparam file="$(find local_planner)/config/local_costmap_params.yaml"/>
     <rosparam file="$(find local_planner)/config/costmap_params.yaml" ns="global_costmap"/>
     <rosparam file="$(find local_planner)/config/global_costmap_params.yaml"/>
-    <remap from="/cmd_vel" to="/husky/cmd_vel"/>
+    <remap from="/cmd_vel" to="/autonomous_navigation/cmd_vel"/>
   </node>
 
   <node pkg="laser_assembler" type="laser_scan_assembler" name="front_laser_scan_assembler" output="screen">
